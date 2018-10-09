@@ -1,4 +1,4 @@
-FROM openjdk:8-jre-alpine
-RUN mkdir -p /opt/tomcat
-RUN addgroup -S tomcat
-RUN adduser -S tomcat -G tomcat
+FROM centos:centos7
+EXPOSE 8080
+COPY  index.html /var/run/web/index.html
+CMD cd /var/run/web && python -m SimpleHTTPServer 8080
