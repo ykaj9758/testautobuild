@@ -21,7 +21,6 @@ LABEL io.openshift.s2i.scripts-url=image:///usr/local/s2i
 # TODO: Copy the S2I scripts to /usr/libexec/s2i, since openshift/base-centos7 image
 # sets io.openshift.s2i.scripts-url label that way, or update that label
 COPY s2i/bin/ /usr/local/s2i 
-RUN chmod 777 -R /usr/local/s2i
 
 # Copy the lighttpd configuration file
 #The destination in the above command (./) is using working directory set in the openshift/base-centos7 image
@@ -30,7 +29,7 @@ COPY ./etc/ /opt/app-root/etc
 
 
 # TODO: Drop the root user and make the content of /opt/app-root owned by user 1001
-RUN chown -R 1001:1001 /opt/app-root
+RUN chown -R 1001:1001 /opt/app-root && && chmod 755 -R /usr/local/s2i
 
 # This default user is created in the openshift/base-centos7 image
 USER 1001
